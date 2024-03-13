@@ -33,21 +33,36 @@ mongoose.connect(
 });
 
 // Setup passport-jwt
-let opts = {}
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secretKey';
-passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
-    User.findOne({_id: jwt_payload.identifier}, function(err, user) {
-        if (err) {
-            return done(err, false);
-        }
-        if (user) {
+// let opts = {}
+// opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+// opts.secretOrKey = 'secretKey';
+// passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
+//     User.findOne({_id: jwt_payload.identifier}, function(err, user) {
+//         if (err) {
+//             return done(err, false);
+//         }
+//         if (user) {
+//             return done(null, user);
+//         } else {
+//             return done(null, false);
+//             // or you could create a new account
+//         }
+//     });
+// }));
+
+passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
+    try{
+        const user = await User.findOne({_id: jwt_payload.identifier});
+
+        if(user){
             return done(null, user);
-        } else {
-            return done(null, false);
-            // or you could create a new account
         }
-    });
+        else {
+            return done(null, false);
+        }
+    }catch(error){
+        return done(error, false);
+    }
 }));
 
 // API: GET type: / : return text "Hello World".
