@@ -45,6 +45,7 @@ router.post("/login", async (req,res) => {
     const user = await User.findOne({email: email});
     if(!user){
         return res.status(403).json({err: "Invalid Credentials"});
+    }
 
     // If the user exists, check if the password is correct. If not, the credentials are wrong.
     // Password was stored in hashed form (cannot be directly compared to password entered by the user).
