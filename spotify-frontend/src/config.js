@@ -1,0 +1,1 @@
+export const cloudinaryUploadPreset = "abh1SHAKE";
