@@ -1,0 +1,20 @@
+@keyframes shimmerAnimation {
+    0% {
+        -webkit-mask-position: 200%;
+    }
+    100% {
+        -webkit-mask-position: -200%;
+    }
+}
+
+.shimmer {
+    position: relative;
+    background-color: #171717;
+    color: transparent;
+    display: inline-block;
+
+    -webkit-mask: linear-gradient(-60deg, #000 30%, #0005, #000 70%);
+    -webkit-mask-size: 200%;
+
+    animation: shimmerAnimation 1.5s infinite linear;
+}

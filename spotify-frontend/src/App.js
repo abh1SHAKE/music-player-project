@@ -1,4 +1,5 @@
 import "./output.css";
+import "./shimmer.css";
 import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import LoginComponent from "./routes/Login";
 import SignupComponent from "./routes/Signup";
