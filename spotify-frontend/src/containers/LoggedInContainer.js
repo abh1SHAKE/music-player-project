@@ -116,8 +116,8 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
                         <IconText 
                         iconName={"entypo:music"}
                         displayText={"My Music"}
-                        targetLink={"/myMusic"}
-                        active={currActiveScreen === "myMusic"}
+                        targetLink={"/music"}
+                        active={currActiveScreen === "music"}
                         />
                     </div>
 

@@ -36,7 +36,7 @@ function App() {
         <Routes>
             <Route path="/home" element={<LoggedInHomeComponent/>}/>
             <Route path="/uploadSong" element={<UploadSong/>}/>
-            <Route path="/myMusic" element={<MyMusic/>}/>
+            <Route path="/music" element={<MyMusic/>}/>
             <Route path="/search" element={<SearchPage/>}/>
             <Route path="/library" element={<Library/>}/>
             <Route path="/playlist/:playlistId" element={<SinglePlaylistView/>}/>
