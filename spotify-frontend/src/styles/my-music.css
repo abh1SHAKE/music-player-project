@@ -1,0 +1,57 @@
+.song-card-container {
+    height: 64px;
+    margin: 0 0 8px 0;
+    justify-content: space-between;
+
+    .song-card-container-left {
+        height: 60px;
+        width: 180px;
+        gap: 20px;
+
+        .song-image-container {
+            height: 60px;
+            width: 60px;
+        }
+
+        .song-details-container {
+            display: flex;
+            flex-direction: column;
+            height: 60px;
+            gap: 4px;
+            align-items: center;
+            justify-content: center;
+
+            .song-details-name, .song-details-artist {
+                width: 60px;
+            }
+
+            .song-details-name {
+                height: 24px;
+            }
+
+            .song-details-artist {
+                height: 16px;
+            }
+        }
+    }
+
+    .song-card-container-right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        width: 120px;
+
+        .song-duration-container {
+            height: 20px;
+            width: 40px;
+        }
+    }
+
+    .song-image-container,
+    .song-details-name,
+    .song-details-artist,
+    .song-duration-container {
+        border-radius: 2px;
+    }
+}
