@@ -1,4 +1,5 @@
 import '../loader.css'
+import '../styles/login.css'
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import TextInput from '../components/shared/TextInput';
