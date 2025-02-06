@@ -1,4 +1,4 @@
-import '../styles/login.css';
+import '../loader.css'
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import TextInput from '../components/shared/TextInput';

@@ -3,20 +3,6 @@
     width: 120px;
 }
 
-.loader {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.loading-bar {
-    width: 4px;
-    height: 12px;
-    background-color: rgba(255, 255, 255, .5);
-    border-radius: 10px;
-    animation: loadingAnimation 1s linear infinite;
-}
-
 .error-message-hidden {
     color: rgb(213, 23, 23);
     transform: translateY(20px);
@@ -29,25 +15,4 @@
     transform: translateY(10px);
     opacity: 1;
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-.loading-bar:nth-child(2) {
-    height: 24px;
-    margin: 0 5px;
-    animation-delay: .25s;
-}
-  
-.loading-bar:nth-child(3) {
-    animation-delay: .5s;
-}
-
-@keyframes loadingAnimation {
-    20% {
-      background-color: white;
-      transform: scaleY(1.5);
-    }
-  
-    40% {
-      transform: scaleY(1);
-    }
 }
