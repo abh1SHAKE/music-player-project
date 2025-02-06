@@ -43,7 +43,7 @@ const SignupComponent = () => {
         <div className="logo p-6 border-b border-solid border-gray-300 w-full flex justify-center">
             <Icon icon="logos:spotify" width="170"/>
         </div>
-        <div className="inputRegion w-1/3 py-7 flex flex-col items-center justify-center">
+        <div className="inputRegion py-7 flex flex-col items-center justify-center">
             {/* Will contain 2 input fields (email and password) 
             for login and also a sign-up button for new users */}
             <div className="font-bold mb-8 text-2xl">Sign up for free to start listening.</div>

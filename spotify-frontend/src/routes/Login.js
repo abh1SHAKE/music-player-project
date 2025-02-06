@@ -1,3 +1,4 @@
+import '../styles/login.css';
 import { Icon } from '@iconify/react';
 import { useState } from 'react';
 import TextInput from '../components/shared/TextInput';
@@ -7,6 +8,7 @@ import { makeUnauthenticatedPOSTRequest } from '../utils/serverHelpers';
 import { useCookies } from 'react-cookie';
 
 const LoginComponent = () => {
+    const [loading, setLoading] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -15,6 +17,11 @@ const LoginComponent = () => {
 
     const login = async () => {
         const data = {email, password};
+        if(data.email.trim() !== "" && data.password.trim() !== "") {
+            setLoading(true);
+        }
+        else return;
+
         const response = await makeUnauthenticatedPOSTRequest("/auth/login",data);
 
         if(response && !response.err){
@@ -24,10 +31,11 @@ const LoginComponent = () => {
             const date = new Date();
             date.setDate(date.getDate()+30);
             setCookie("token", token, {path: "/", expires: date});
-            alert("Logged In Successfully");
             navigate("/home");
         }
         else alert("Email/Password is Incorrect");
+
+        setLoading(false);
     };
 
     return <div className="w-full h-full flex flex-col items-center">
@@ -35,9 +43,7 @@ const LoginComponent = () => {
             <Icon icon="logos:spotify" width="170"/>
         </div>
         <div className="inputRegion w-1/3 py-7 flex flex-col items-center justify-center">
-            {/* Will contains 2 input fields (email and password) 
-            for login and also a sign-up button for new users */}
-            <div className="font-bold mb-8">To continue, log in to Spotify.</div>
+            <div className="font-bold pb-8">To continue, log in to Spotify.</div>
 
             <TextInput
                 label="Email address or username"
@@ -54,9 +60,19 @@ const LoginComponent = () => {
             />
             <div className="w-full flex items-center justify-center my-7">
                 <button 
-                    className="bg-app-green text-white font-semibold p-3 px-9 rounded-full"
+                    className="login-button bg-app-green text-white font-semibold p-3 px-9 rounded-full"
                     onClick={(e) => {e.preventDefault(); login();}}>
-                    LOG IN
+                    <div>
+                        {
+                            loading ?
+                            <div className="loader">
+                                <span className="loading-bar"></span>
+                                <span className="loading-bar"></span>
+                                <span className="loading-bar"></span>
+                            </div> :
+                            <div>LOGIN</div>
+                        }
+                    </div>
                 </button>
             </div>
             <div className="w-full border-b border-solid border-gray-300"></div>
