@@ -9,6 +9,7 @@ import { useCookies } from 'react-cookie';
 
 const LoginComponent = () => {
     const [loading, setLoading] = useState(false);
+    const [loginError, setLoginError] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -33,7 +34,9 @@ const LoginComponent = () => {
             setCookie("token", token, {path: "/", expires: date});
             navigate("/home");
         }
-        else alert("Email/Password is Incorrect");
+        else {
+            setLoginError(true);
+        }
 
         setLoading(false);
     };
@@ -43,12 +46,16 @@ const LoginComponent = () => {
             <Icon icon="logos:spotify" width="170"/>
         </div>
         <div className="inputRegion w-1/3 py-7 flex flex-col items-center justify-center">
-            <div className="font-bold pb-8">To continue, log in to Spotify.</div>
+            <div className="font-bold pb-6">To continue, log in to Spotify.</div>
+
+            <div className={`${loginError ? "error-message-visible" : "error-message-hidden"}`}>
+                Email or password is incorrect, Please try again.
+            </div>
 
             <TextInput
                 label="Email address or username"
                 placeholder="Email address or username"
-                className="my-5"
+                className="py-5"
                 value={email}
                 setValue={setEmail}
             />
