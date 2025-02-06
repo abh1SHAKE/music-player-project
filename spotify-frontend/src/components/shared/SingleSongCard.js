@@ -12,7 +12,7 @@ const SingleSongCard = ({info, playSound}) => {
                 backgroundImage: `url(${info.thumbnail})`
             }}
         ></div>
-        <div className="flex w-full">
+        <div className="flex w-full justify-between">
             <div className="text-white flex flex-col justify-center pl-5 w-5/6">
                 <div className="cursor-pointer hover:underline">
                     {info.name}
@@ -21,7 +21,7 @@ const SingleSongCard = ({info, playSound}) => {
                     {info.artist.firstName + " " + info.artist.lastName}
                 </div>
             </div>
-            <div className="w-1/6 flex items-center justify-center text-gray-400 text-sm">
+            <div className="w-20 flex items-center justify-center text-gray-400 text-sm">
                 <div>3:47</div>
             </div>
         </div>

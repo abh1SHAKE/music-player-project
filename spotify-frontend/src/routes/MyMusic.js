@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import LoggedInContainer from '../containers/LoggedInContainer';
 
 const MyMusic = () => {
-    const shimmerCount = 7;
+    const shimmerCount = 5;
     const [songData, setSongData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
