@@ -1,3 +1,4 @@
+import '../styles/logged-in-container.css';
 import { Icon } from '@iconify/react';
 import IconText from '../components/shared/IconText';
 import NavbarText from '../components/shared/NavbarText';
@@ -15,6 +16,8 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
     const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
     const [addToPlaylistModalOpen, setAddToPlaylistModalOpen] = useState(false);
 
+    const [songProgress, setSongProgress] = useState(0);
+
     const {currentSong,
             setCurrentSong,
             soundPlayed,
@@ -24,6 +27,30 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
         } = useContext(songContext);
 
     const firstUpdate = useRef(true);
+
+    const formatSongDuration = (seconds) => {
+        if(!seconds) return "-:--"
+    
+        const roundedSeconds = Math.round(seconds);
+        const mins = Math.floor(roundedSeconds/60);
+        const secs = roundedSeconds % 60;
+    
+        return `${mins}:${secs.toString().padStart(2,"0")}`
+    }
+
+    useEffect(() => {
+        if(!soundPlayed) {
+            return;
+        }
+
+        const updateProgress = setInterval(() => {
+            if(!isPaused && soundPlayed.playing()) {
+                setSongProgress(soundPlayed.seek());
+            }
+        },1000);
+
+        return () => clearInterval(updateProgress);
+    },[soundPlayed, isPaused]);
 
     useLayoutEffect(() => {
         if(firstUpdate.current){
@@ -200,7 +227,17 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
                             <Icon icon="pepicons-pop:repeat" fontSize={16} 
                             className="cursor-pointer text-gray-400 hover:text-white"/>
                         </div>
-                        <div>{/* Progress Bar */}</div>
+                        <div className='flex flex-row items-center'>
+                            <div className='duration-elapsed text-gray-400'>{formatSongDuration(songProgress)}</div>
+                            <div className='progress-bar-container relative cursor-pointer'>
+                                {/* Progress Bar */}
+                                <div className='progress-bar-front absolute'
+                                    style={{ width: `${(songProgress / currentSong.duration) * 100}%` }}
+                                ></div>
+                                <div className='progress-bar-back'></div>
+                            </div>
+                            <div className='total-duration text-gray-400'>{formatSongDuration(currentSong.duration)}</div>
+                        </div>
                     </div>
                     <div className="w-1/4 flex justify-end px-3">
                             <Icon icon="ic:round-playlist-add" fontSize={25} 
