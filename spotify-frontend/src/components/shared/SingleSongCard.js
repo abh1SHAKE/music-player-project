@@ -3,7 +3,18 @@ import '../../styles/single-song-card.css'
 import { useContext } from "react";
 import songContext from "../../contexts/songContext";
 
+const formatSongDuration = (seconds) => {
+    if(!seconds) return "N/A"
+
+    const roundedSeconds = Math.round(seconds);
+    const mins = Math.floor(roundedSeconds/60);
+    const secs = roundedSeconds % 60;
+
+    return `${mins} : ${secs.toString().padStart(2,"0")}`
+}
+
 const SingleSongCard = ({info, playSound}) => {
+    console.log("SONG INFO: ",info);
     const {currentSong,setCurrentSong} = useContext(songContext);
     const {isPaused, setIsPaused} = useContext(songContext);
     const isPlaying = currentSong && currentSong._id === info._id;
@@ -35,7 +46,7 @@ const SingleSongCard = ({info, playSound}) => {
                 </div>
             </div>
             <div className="w-20 flex items-center justify-center text-gray-400 text-sm">
-                <div>3:47</div>
+                <div>{formatSongDuration(info.duration)}</div>
             </div>
         </div>
     </div>
