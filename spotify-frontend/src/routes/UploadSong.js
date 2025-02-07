@@ -8,6 +8,7 @@ import LoggedInContainer from '../containers/LoggedInContainer';
 const UploadSong = () => {
     const [name, setName] = useState("");
     const [thumbnail, setThumbnail] = useState("");
+    const [duration, setDuration] = useState(null);
     const [playlistUrl, setPlaylistUrl] = useState("");
     const [uploadedSongFileName, setUploadedSongFileName] = useState();
 
@@ -17,7 +18,7 @@ const UploadSong = () => {
         console.log(name);
         console.log(thumbnail);
         console.log(playlistUrl);
-        const data ={name, thumbnail, track: playlistUrl};
+        const data ={name, thumbnail, track: playlistUrl, duration};
         const response = await makeAuthenticatedPOSTRequest("/song/create",data);
         
         if(response.err){
@@ -61,7 +62,11 @@ const UploadSong = () => {
                                 {uploadedSongFileName.substring(0,35)}...
                             </div>
                         ) : (
-                            <CloudinaryUpload setUrl={setPlaylistUrl} setName={setUploadedSongFileName}/>
+                            <CloudinaryUpload 
+                                setUrl={setPlaylistUrl} 
+                                setDuration={setDuration}
+                                setName={setUploadedSongFileName}
+                            />
                         )
                         }
                     </div>

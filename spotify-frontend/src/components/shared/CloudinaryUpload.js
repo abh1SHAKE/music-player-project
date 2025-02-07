@@ -1,18 +1,20 @@
 import {openUploadWidget} from "../../utils/cloudinaryService";
 import { cloudinaryUploadPreset } from "../../config";
 
-const CloudinaryUpload = ({setUrl, setName}) => {
+const CloudinaryUpload = ({setUrl, setName, setDuration}) => {
     const uploadImageWidget = () => {
         let myUploadWidget = openUploadWidget(
             {
                 cloudName: "duqy7jmma",
                 uploadPreset: cloudinaryUploadPreset,
                 sources: ["local"],
+                resourceType: "video",
             },
             function (error, result) {
                 if (!error && result.event === "success") {
                     setUrl(result.info.secure_url);
                     setName(result.info.original_filename);
+                    setDuration(result.info.duration);
                 } else {
                     if (error) {
                         console.log(error);
