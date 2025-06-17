@@ -1,5 +1,5 @@
 # Tell GitHub Linguist to treat this folder as source
-spotify-frontend/src/** linguist-detectable=true
+spotify-frontend/src/**/* linguist-detectable=true
 
 # Explicitly mark file types
 *.js linguist-language=JavaScript
