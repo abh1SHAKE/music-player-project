@@ -1,0 +1,52 @@
+# Dependencies
+spotify-frontend/node_modules/
+spotify-backend/node_modules/
+node_modules/
+
+# Production builds
+spotify-frontend/build/
+spotify-backend/build/
+spotify-backend/dist/
+
+# Environment variables
+spotify-backend/.env
+spotify-backend/.env.local
+spotify-backend/.env.development.local
+spotify-backend/.env.test.local
+spotify-backend/.env.production.local
+spotify-frontend/.env
+spotify-frontend/.env.local
+spotify-frontend/.env.development.local
+spotify-frontend/.env.test.local
+spotify-frontend/.env.production.local
+
+# Testing
+spotify-frontend/coverage/
+spotify-backend/coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*/npm-debug.log*
+*/yarn-debug.log*
+*/yarn-error.log*
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+*.temp

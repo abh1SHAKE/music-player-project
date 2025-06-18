@@ -1,12 +1,30 @@
-# Tell GitHub Linguist to treat this folder as source
-spotify-frontend/src/**/* linguist-detectable=true
-
 # Explicitly mark file types
 *.js linguist-language=JavaScript
 *.jsx linguist-language=JavaScript
 *.css linguist-language=CSS
+*.html linguist-language=HTML
 
-# Ignore large or irrelevant folders
-spotify-frontend/node_modules/ linguist-vendored
-spotify-frontend/build/ linguist-vendored
-spotify-frontend/public/ linguist-vendored
+# Tell GitHub Linguist to treat source code as detectable
+spotify-frontend/src/**/* linguist-detectable=true
+spotify-backend/src/**/* linguist-detectable=true
+
+# Mark vendor/build files as vendored (exclude from language stats)
+spotify-frontend/node_modules/** linguist-vendored=true
+spotify-backend/node_modules/** linguist-vendored=true
+spotify-frontend/build/** linguist-vendored=true
+spotify-backend/build/** linguist-vendored=true
+spotify-backend/dist/** linguist-vendored=true
+spotify-frontend/public/** linguist-vendored=true
+
+# Mark generated files
+spotify-frontend/build/** linguist-generated=true
+spotify-backend/build/** linguist-generated=true
+spotify-backend/dist/** linguist-generated=true
+
+# Mark minified files as vendored
+*.min.css linguist-vendored=true
+*.min.js linguist-vendored=true
+
+# Package files
+package-lock.json linguist-generated=true
+yarn.lock linguist-generated=true
