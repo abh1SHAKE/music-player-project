@@ -28,3 +28,5 @@ spotify-backend/dist/** linguist-generated=true
 # Package files
 package-lock.json linguist-generated=true
 yarn.lock linguist-generated=true
+
+spotify-frontend/src/output.css linguist-generated=true
