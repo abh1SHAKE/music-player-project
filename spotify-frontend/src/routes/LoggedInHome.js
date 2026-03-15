@@ -95,12 +95,12 @@ const LoggedInHomeComponent = () => {
 };
 
 const PlaylistView = ({titleText,cardsData}) => {
-    return <div className="text-white mt-8">
-        <div className="text-xl font-semibold mb-5 ml-2"> {titleText} </div>
-        <div className="w-full flex justify-between space-x-4">
+    return <div className="text-white mt-6 sm:mt-8">
+        <div className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-5 ml-0 sm:ml-2"> {titleText} </div>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {
                 cardsData?.map((item) => {
-                    return <Card title={item.title} desc={item.desc} imgUrl={item.imgUrl}/>
+                    return <Card key={item.title} title={item.title} desc={item.desc} imgUrl={item.imgUrl} songUrl={item.songUrl}/>
                 })
             }
         </div>
@@ -109,13 +109,13 @@ const PlaylistView = ({titleText,cardsData}) => {
 
 const Card = ({title,desc,imgUrl,songUrl}) => {
     return (
-        <div className="bg-black bg-opacity-30 w-1/5 p-4 rounded-lg">
-            <div className="py-3">
-                <img className="w-full rounded-md" alt="album-cover"
+        <div className="bg-black bg-opacity-30 w-full min-w-0 p-2 sm:p-3 md:p-4 rounded-lg">
+            <div className="py-2 sm:py-3">
+                <img className="w-full aspect-square object-cover rounded-md" alt="album-cover"
                 src={imgUrl}></img>
             </div>
-            <div className="text-white font-semibold py-2">{title}</div>
-            <div className="text-gray-500 text-sm">{desc}</div>
+            <div className="text-white font-semibold py-1 sm:py-2 text-sm sm:text-base truncate" title={title}>{title}</div>
+            <div className="text-gray-500 text-xs sm:text-sm truncate" title={desc}>{desc}</div>
         </div>
     )
 }

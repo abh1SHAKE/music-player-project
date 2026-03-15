@@ -1,4 +1,3 @@
-import '../../loader.css';
 import '../../styles/single-song-card.css'
 import { useContext, useState } from "react";
 import songContext from "../../contexts/songContext";
@@ -13,11 +12,21 @@ const formatSongDuration = (seconds) => {
     return `${mins} : ${secs.toString().padStart(2,"0")}`
 }
 
-const SingleSongCard = ({info, playSound}) => {
-    console.log("SONG INFO: ",info);
-    const {currentSong, setCurrentSong, isPaused, setIsPaused} = useContext(songContext);
+const SingleSongCard = ({ info, playSound, songList }) => {
+    const { currentSong, setCurrentSong, setQueue, isPaused } = useContext(songContext);
     const isPlaying = currentSong && currentSong._id === info._id;
     const [imageError, setImageError] = useState(false);
+
+    const handleClick = () => {
+        if (Array.isArray(songList) && songList.length > 0) {
+            const index = songList.findIndex((s) => s._id === info._id);
+            if (index >= 0) {
+                setQueue(songList, index);
+                return;
+            }
+        }
+        setQueue([info], 0);
+    };
 
     const isValidUrl = (string) => {
         try {
@@ -31,7 +40,7 @@ const SingleSongCard = ({info, playSound}) => {
     const shouldShowImage = info.thumbnail && isValidUrl(info.thumbnail) && !imageError;
 
     return <div className="flex hover:bg-gray-400 hover:bg-opacity-10 p-2 rounded-sm cursor-pointer"
-    onClick={()=>{setCurrentSong(info);}}>
+    onClick={handleClick}>
         <div className='album-cover relative'>
             {shouldShowImage ? (
                 <div
@@ -60,10 +69,11 @@ const SingleSongCard = ({info, playSound}) => {
             )}
 
             {isPlaying && !isPaused && (
-                    <div className='loader absolute'>
-                        <div className='loading-bar'></div>
-                        <div className='loading-bar'></div>
-                        <div className='loading-bar'></div>
+                    <div className="now-playing-indicator" aria-hidden="true">
+                        <span className="now-playing-bar" />
+                        <span className="now-playing-bar" />
+                        <span className="now-playing-bar" />
+                        <span className="now-playing-bar" />
                     </div>
                 )}
         </div>

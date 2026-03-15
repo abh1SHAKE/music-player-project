@@ -10,16 +10,26 @@ import MyMusic from "./routes/MyMusic";
 import SearchPage from "./routes/SearchPage";
 import { useCookies } from "react-cookie";
 import songContext from "./contexts/songContext";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Library from "./routes/Library";
 import SinglePlaylistView from "./routes/SinglePlaylistView";
 
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
   const [cookie, setCookie] = useCookies(["token"]);
-  const [soundPlayed, setSoundPlayed] = useState(null); 
-  // The song will be paused by default (isPaused = true). 
+  const [soundPlayed, setSoundPlayed] = useState(null);
   const [isPaused, setIsPaused] = useState(true);
+  const [queue, setQueueState] = useState([]);
+  const [shuffleMode, setShuffleMode] = useState(false);
+  const [loopMode, setLoopMode] = useState("none"); // "none" | "one" | "all"
+
+  const setQueue = useCallback((songs, startIndex = 0) => {
+    if (!Array.isArray(songs) || songs.length === 0) return;
+    const index = Math.max(0, Math.min(startIndex, songs.length - 1));
+    setQueueState(songs);
+    setCurrentSong(songs[index]);
+  }, []);
+
   return (
     <div className="w-screen h-screen font-poppins">
       <BrowserRouter>
@@ -27,13 +37,19 @@ function App() {
         cookie.token?
         // LoggedIn Routes
         <songContext.Provider value={{
-          currentSong, 
+          currentSong,
           setCurrentSong,
           soundPlayed,
           setSoundPlayed,
           isPaused,
-          setIsPaused
-          }}>
+          setIsPaused,
+          queue,
+          setQueue,
+          shuffleMode,
+          setShuffleMode,
+          loopMode,
+          setLoopMode,
+        }}>
         <Routes>
             <Route path="/home" element={<LoggedInHomeComponent/>}/>
             <Route path="/uploadSong" element={<UploadSong/>}/>

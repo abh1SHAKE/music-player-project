@@ -44,7 +44,7 @@ const MyMusic = () => {
         <>
             <div className="space-y-3 overflow-auto">
                 {songData.map((item) => (
-                    <SingleSongCard key={item.id} info={item} playSound={() => {}} />
+                    <SingleSongCard key={item.id || item._id} info={item} songList={songData} playSound={() => {}} />
                 ))}
             </div>
         </>

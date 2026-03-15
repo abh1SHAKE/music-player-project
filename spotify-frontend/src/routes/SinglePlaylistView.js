@@ -24,9 +24,9 @@ const SinglePlaylistView = () => {
                     {playlistDetails.name}
                 </div>
                 <div className="pt-10 space-y-3 overflow-auto">
-                    {playlistDetails.songs.map(item=>{
-                        return <SingleSongCard info={item} 
-                        key={JSON.stringify(item)}
+                    {playlistDetails.songs.map((item, index)=>{
+                        return <SingleSongCard key={item._id} info={item}
+                        songList={playlistDetails.songs}
                         playSound={()=>{}}/>
                     })}
                 </div>

@@ -7,6 +7,9 @@ module.exports = {
         "app-green": "rgb(29,185,84)",
         "app-black": "#121212",
       },
+      textColor: {
+        "app-green": "rgb(29,185,84)",
+      },
       fontFamily: {
         "poppins": ["Poppins", "sans-serif"],
       },

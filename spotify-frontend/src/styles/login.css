@@ -1,6 +1,6 @@
 .login-button {
-    height: 48px;
-    width: 120px;
+    min-height: 48px;
+    min-width: 120px;
 }
 
 .error-message-hidden {

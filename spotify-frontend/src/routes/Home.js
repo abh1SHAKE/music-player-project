@@ -89,15 +89,15 @@ const cardsThree = [
 
 const HomeComponent = () => {
     return (
-        <div className="h-full w-full flex">
-            {/* Sidebar */}
-            <div className="h-full w-1/5 bg-black flex flex-col justify-between pb-12">
+        <div className="h-screen w-full overflow-hidden flex flex-col lg:flex-row">
+            {/* Sidebar - hidden on mobile/tablet, visible from lg */}
+            <div className="hidden lg:flex h-full lg:w-1/5 lg:min-w-[180px] xl:min-w-[220px] bg-black flex-col justify-between pb-12 shrink-0">
                 <div>
-                <div className="logoDiv p-6">
-                    <Icon icon="logos:spotify" width="110"/>
+                <div className="logoDiv p-4 xl:p-6">
+                    <Icon icon="logos:spotify" width="110" className="max-w-[90px] xl:max-w-[110px]"/>
                 </div>
 
-                <div className="py-5">
+                <div className="py-3 xl:py-5">
                     <IconText 
                     iconName={"ant-design:home-filled"}
                     displayText={"Home"}
@@ -113,7 +113,7 @@ const HomeComponent = () => {
                     />
                 </div>
 
-                <div className="pt-8">
+                <div className="pt-6 xl:pt-8">
                     <IconText 
                     iconName={"ph:plus-fill"}
                     displayText={"Create Playlist"}
@@ -124,7 +124,7 @@ const HomeComponent = () => {
                     />
                 </div>
                 </div>
-                <div className="px-6">
+                <div className="px-4 xl:px-6">
                     <div 
                     className="border border-gray-100 text-white rounded-full items-center
                     justify-center w-2/5 flex px-2 py-1 cursor-pointer hover:border-white">
@@ -135,29 +135,26 @@ const HomeComponent = () => {
             </div>
 
             {/* Main Content */}
-            <div className="h-full w-4/5 bg-app-black overflow-auto">
-                <div className="navbar w-full h-1/10 bg-black bg-opacity-40 flex items-center justify-end">
-                    <div className="w-1/2 flex h-full">
-                        <div className="w-3/5 flex justify-around items-center">
+            <div className="flex-1 min-w-0 w-full lg:w-4/5 bg-app-black overflow-hidden flex flex-col">
+                <div className="navbar w-full min-h-[56px] lg:h-1/10 bg-black bg-opacity-40 flex items-center justify-end shrink-0 px-3 sm:px-4 md:px-6">
+                    <div className="w-full lg:w-1/2 flex h-full flex-nowrap items-center justify-end gap-3 sm:gap-6 py-2">
+                        <div className="hidden sm:flex flex-nowrap items-center gap-3 sm:gap-6 shrink-0">
                             <NavbarText displayText={"Premium"}/>
                             <NavbarText displayText={"Support"}/>
                             <NavbarText displayText={"Download"}/>
-                            <div className="h-1/2 border-r border-white"></div>
+                            <div className="hidden md:block h-6 border-r border-white shrink-0"></div>
                         </div>
-                        <div className="w-2/5 flex justify-around h-full items-center">
-                            <div className="flex items-center justify-start cursor-pointer">
-                                <div className={"text-gray-500 font-semibold hover:text-white"}>
-                                    <Link to="/signup">Sign Up</Link>
-                                </div>
+                        <div className="flex flex-nowrap items-center gap-3 sm:gap-6 shrink-0">
+                            <div className="text-gray-500 font-semibold hover:text-white text-sm sm:text-base whitespace-nowrap">
+                                <Link to="/signup">Sign Up</Link>
                             </div>
-                            <div className="bg-white h-3/5 px-8 flex items-center
-                            justify-center rounded-full font-semibold cursor-pointer">
+                            <div className="bg-white h-8 py-1 px-3 flex items-center justify-center rounded-full font-semibold cursor-pointer text-sm sm:text-base whitespace-nowrap shrink-0">
                                 <Link to="/login">Login</Link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="content p-8 pt-0 overflow-auto">
+                <div className="content p-4 sm:p-6 md:p-8 pt-2 sm:pt-4 md:pt-0 overflow-y-auto flex-1 min-h-0">
                     <PlaylistView titleText="Recently Played" cardsData={cardsOne}/>
                     <PlaylistView titleText="You might also like" cardsData={cardsTwo}/>
                     <PlaylistView titleText="Based on your interests" cardsData={cardsThree}/>
@@ -168,12 +165,12 @@ const HomeComponent = () => {
 };
 
 const PlaylistView = ({titleText,cardsData}) => {
-    return <div className="text-white mt-8">
-        <div className="text-xl font-semibold mb-5 ml-2"> {titleText} </div>
-        <div className="w-full flex justify-between space-x-4">
+    return <div className="text-white mt-6 sm:mt-8">
+        <div className="text-base sm:text-lg md:text-xl font-semibold mb-3 sm:mb-5 ml-0 sm:ml-2"> {titleText} </div>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
             {
                 cardsData?.map((item) => {
-                    return <Card title={item.title} desc={item.desc} imgUrl={item.imgUrl}/>
+                    return <Card key={item.title} title={item.title} desc={item.desc} imgUrl={item.imgUrl}/>
                 })
             }
         </div>
@@ -182,13 +179,13 @@ const PlaylistView = ({titleText,cardsData}) => {
 
 const Card = ({title,desc,imgUrl}) => {
     return (
-        <div className="bg-black bg-opacity-30 w-1/5 p-4 rounded-lg">
-            <div className="py-3">
-                <img className="w-full rounded-md" alt="album-cover"
+        <div className="bg-black bg-opacity-30 w-full min-w-0 p-2 sm:p-3 md:p-4 rounded-lg">
+            <div className="py-2 sm:py-3">
+                <img className="w-full aspect-square object-cover rounded-md" alt="album-cover"
                 src={imgUrl}></img>
             </div>
-            <div className="text-white font-semibold py-2">{title}</div>
-            <div className="text-gray-500 text-sm">{desc}</div>
+            <div className="text-white font-semibold py-1 sm:py-2 text-sm sm:text-base truncate" title={title}>{title}</div>
+            <div className="text-gray-500 text-xs sm:text-sm truncate" title={desc}>{desc}</div>
         </div>
     )
 }

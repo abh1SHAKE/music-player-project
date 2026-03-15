@@ -44,9 +44,9 @@ const SearchPage = () => {
 
                 <div className="pt-10 space-y-3 overflow-auto">
                     <div className="text-white pl-2">Showing search results for <span className="font-bold">{searchText}</span> :</div>
-                    {songData.map(item=>{
-                        return <SingleSongCard info={item} 
-                        key={JSON.stringify(item)}
+                    {songData.map((item)=>{
+                        return <SingleSongCard key={item._id} info={item}
+                        songList={songData}
                         playSound={()=>{}}/>
                     })}
                 </div>

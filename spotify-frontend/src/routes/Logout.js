@@ -27,7 +27,7 @@ const LogoutButton = () => {
     }
 
     return (
-        <div className="bg-white w-20 h-10 mr-3 flex items-center
+        <div className="bg-white py-1 px-3 mr-3 flex items-center
         justify-center rounded-full font-semibold cursor-pointer"
         onClick={(e) => {e.preventDefault(); logout(); pauseSound();}}>
             Logout
