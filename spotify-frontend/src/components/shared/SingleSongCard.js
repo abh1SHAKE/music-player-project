@@ -13,7 +13,7 @@ const formatSongDuration = (seconds) => {
 }
 
 const SingleSongCard = ({ info, playSound, songList }) => {
-    const { currentSong, setCurrentSong, setQueue, isPaused } = useContext(songContext);
+    const { currentSong, setQueue, isPaused } = useContext(songContext);
     const isPlaying = currentSong && currentSong._id === info._id;
     const [imageError, setImageError] = useState(false);
 

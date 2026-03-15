@@ -16,7 +16,7 @@ import SinglePlaylistView from "./routes/SinglePlaylistView";
 
 function App() {
   const [currentSong, setCurrentSong] = useState(null);
-  const [cookie, setCookie] = useCookies(["token"]);
+  const [cookie] = useCookies(["token"]);
   const [soundPlayed, setSoundPlayed] = useState(null);
   const [isPaused, setIsPaused] = useState(true);
   const [queue, setQueueState] = useState([]);

@@ -2,7 +2,7 @@ import '../styles/logged-in-container.css';
 import { Icon } from '@iconify/react';
 import IconText from '../components/shared/IconText';
 import NavbarText from '../components/shared/NavbarText';
-import {Howl, Howler} from "howler";
+import { Howl } from "howler";
 import { useContext, useLayoutEffect, useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import songContext from '../contexts/songContext';
@@ -95,6 +95,7 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
         soundPlayed.volume(muted ? 0 : volume);
     }, [soundPlayed, volume, muted]);
 
+    const currentTrack = currentSong?.track;
     useLayoutEffect(() => {
         if (firstUpdate.current) {
             firstUpdate.current = false;
@@ -103,7 +104,8 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
         if (!currentSong) return;
         setSongProgress(0);
         changeSong(currentSong.track);
-    }, [currentSong && currentSong.track]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- we only want to run when the track URL changes; changeSong is stable enough via ref
+    }, [currentTrack]);
 
     useEffect(() => {
         changeSongRef.current = changeSong;
@@ -153,7 +155,7 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
             if (soundPlayed) soundPlayed.stop();
             setIsPaused(true);
         }
-    }, [soundPlayed, setCurrentSong]);
+    }, [soundPlayed, setCurrentSong, setIsPaused]);
 
     const changeSong = (songSrc) => {
         if (soundPlayed) soundPlayed.stop();
@@ -212,7 +214,7 @@ const LoggedInContainer = ({children, currActiveScreen, currUser}) => {
             if (soundPlayed) soundPlayed.stop();
             setIsPaused(true);
         }
-    }, [queue, loopMode, positionInPlayOrder, playOrderIndices, soundPlayed, setCurrentSong]);
+    }, [queue, loopMode, positionInPlayOrder, playOrderIndices, soundPlayed, setCurrentSong, setIsPaused]);
 
     const toggleShuffle = useCallback(() => setShuffleMode((s) => !s), [setShuffleMode]);
     const cycleLoopMode = useCallback(() => {
