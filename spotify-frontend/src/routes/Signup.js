@@ -14,7 +14,7 @@ const SignupComponent = () => {
     const [lastName, setLastName] = useState("");
     const [username, setUsername] = useState("");
     
-    const [cookie, setCookie] = useCookies(["token"]);
+    const [, setCookie] = useCookies(["token"]);
     const navigate = useNavigate();
 
     // Function that will be called when we eventually click on 'Sign up'.

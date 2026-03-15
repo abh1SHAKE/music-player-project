@@ -8,14 +8,13 @@ const SinglePlaylistView = () => {
     const [playlistDetails, setPlaylistDetails] = useState({});
     const {playlistId} = useParams();
 
-    useEffect(()=>{
+    useEffect(() => {
         const getData = async () => {
-            const response = await makeAuthenticatedGETRequest("/playlist/get/playlist/"+playlistId);
-            console.log(response);
+            const response = await makeAuthenticatedGETRequest("/playlist/get/playlist/" + playlistId);
             setPlaylistDetails(response);
-        }
+        };
         getData();
-    },[]);
+    }, [playlistId]);
 
     return (
         <LoggedInContainer currActiveScreen={"library"}>

@@ -5,15 +5,8 @@ import songContext from "../contexts/songContext";
 
 const LogoutButton = () => {
     const navigate = useNavigate();
-    const [cookies, setCookie, removeCookie] = useCookies(['token']);
-
-    const {currentSong,
-        setCurrentSong,
-        soundPlayed,
-        setSoundPlayed,
-        isPaused,
-        setIsPaused
-    } = useContext(songContext);
+    const [, , removeCookie] = useCookies(['token']);
+    const { soundPlayed } = useContext(songContext);
 
     const pauseSound = () => {
         if(soundPlayed){
